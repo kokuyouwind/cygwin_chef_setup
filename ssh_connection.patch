@@ -1,0 +1,4 @@
+36c36
+<       @session ||= Net::SSH.start(host, user, connection_options)
+---
+>       Net::SSH.start(host, user, connection_options)
