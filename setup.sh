@@ -2,6 +2,9 @@
 
 # required wget, virtualbox, vagrant
 #   wget       : install from cygwin installer
+#   git        : install from cygwin installer
+#   gcc-core   : install from cygwin installer
+#   libcrypt-devel : install from cygwin installer
 #   virtualbox : https://www.virtualbox.org/
 #   vagrant    : http://www.vagrantup.com/
 
@@ -89,7 +92,9 @@ if ! is_installed apt-cyg; then
     validate_installed_or_die apt-cyg
     echo "installed."
 fi
-
+#install make tools
+install_by_apt make
+install_by_apt patch
 # install ruby
 install_by_apt libyaml0_2
 install_by_apt ruby
@@ -113,7 +118,7 @@ echo "finish updating gem"
 # install chef
 install_by_gem chef chef-solo
 # install knife-solo
-if knife solo clean --help > /dev/null 2>&1; then
+if ! knife solo clean --help > /dev/null 2>&1; then
     echo "knife-solo not installed. installing..."
     gem install knife-solo
     echo "installed."
